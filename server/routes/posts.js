@@ -1,12 +1,12 @@
 import express from 'express'
 
+import { getPosts } from '../controllers/posts.js'
+
 // Set up router
 const router = express.Router()
 
 // Routes
-router.get('/', (req, res) => {
-	res.send('THIS WORKS')
-})
+router.get('/', getPosts)
 
 // Export route
 export default router
