@@ -5,6 +5,7 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
 import DeleteIcon from '@material-ui/icons/Delete'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 
+import defaultPicture from '../../../assets/pexels-karolina-grabowska-4194857.jpg'
 import useStyles from './styles'
 import { useDispatch } from 'react-redux'
 import { deletePost } from '../../../actions/posts'
@@ -15,7 +16,7 @@ const Post = ({ post, setCurrentId }) => {
 
 	return (
 		<Card className={classes.card}>
-			<CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
+			<CardMedia className={classes.media} image={post.selectedFile || defaultPicture} title={post.title} />
 			<div className={classes.overlay}>
 				<Typography variant='h6'>{post.creator}</Typography>
 				<Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
