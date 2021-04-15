@@ -17,6 +17,10 @@ app.use(cors())
 // Posts routes are at 5000/posts
 app.use('/posts', postRoutes)
 
+app.get('/', (req, res) => {
+	res.send('Hello to my API')
+})
+
 // Connect to MongoDB
 const PORT = process.env.PORT || 5000
 
