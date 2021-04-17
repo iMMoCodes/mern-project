@@ -2,7 +2,9 @@ import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
+
 import postRoutes from './routes/posts.js'
+import userRoutes from './routes/users.js'
 
 // Initialize app
 const app = express()
@@ -14,8 +16,9 @@ app.use(express.json({ limit: '30mb', extended: true }))
 app.use(express.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors())
 
-// Posts routes are at 5000/posts
+// Routes
 app.use('/posts', postRoutes)
+app.use('/user', userRoutes)
 
 app.get('/', (req, res) => {
 	res.send('Hello to my API')
