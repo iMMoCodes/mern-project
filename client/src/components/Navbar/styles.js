@@ -40,4 +40,18 @@ export default makeStyles((theme) => ({
 		color: theme.palette.getContrastText(deepPurple[500]),
 		backgroundColor: deepPurple[500],
 	},
+	[theme.breakpoints.down('sm')]: {
+		appBar: {
+			flexDirection: 'column',
+		},
+		toolbar: {
+			width: '100%',
+		},
+		userName: {
+			marginLeft: '15px',
+		},
+		purple: {
+			marginTop: '10px',
+		},
+	},
 }))
