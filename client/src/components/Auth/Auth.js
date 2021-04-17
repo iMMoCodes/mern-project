@@ -43,7 +43,7 @@ const Auth = () => {
 
 	const switchMode = () => {
 		setIsSigned((prevIsSigned) => !prevIsSigned)
-		handleShowPassword(false)
+		setShowPassword(false)
 	}
 
 	const googleSuccess = async (res) => {
