@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import PostMessage from '../models/postMessage.js'
 
-// Get posts
+// Get Posts
 export const getPosts = async (req, res) => {
 	try {
 		const postMessages = await PostMessage.find()
@@ -11,15 +11,26 @@ export const getPosts = async (req, res) => {
 	}
 }
 
-// Create posts
+// Get post
+export const getPost = async (req, res) => {
+	const { id } = req.params
+	try {
+		const post = await PostMessage.findById(id)
+		res.status(200).json(post)
+	} catch (error) {
+		res.status(404).json({ message: error.message })
+	}
+}
+
+// Create post
 export const createPost = async (req, res) => {
 	const post = req.body
 
-	const newPost = new PostMessage(post)
+	const newPostMessage = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() })
 
 	try {
-		await newPost.save()
-		res.status(201).json(newPost)
+		await newPostMessage.save()
+		res.status(201).json(newPostMessage)
 	} catch (error) {
 		res.status(409).json({ message: error.message })
 	}
@@ -27,12 +38,14 @@ export const createPost = async (req, res) => {
 
 // Update posts
 export const updatePost = async (req, res) => {
-	const { id: _id } = req.params
-	const post = req.body
+	const { id } = req.params
+	const { title, message, selectedFile, creator, tags } = req.body
 
-	if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id')
+	if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id')
 
-	const updatedPost = await PostMessage.findByIdAndUpdate(_id, { ...post, _id }, { new: true })
+	const updatedPost = { title, message, selectedFile, creator, tags, _id: id }
+
+	await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true })
 
 	res.json(updatedPost)
 }
