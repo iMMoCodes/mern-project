@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL: 'http://localhost:5000' })
-
-// https://immo-post-project.herokuapp.com
+const API = axios.create({ baseURL: 'https://immo-post-project.herokuapp.com' })
 
 // Send token back to backend to verify logging
 API.interceptors.request.use((req) => {
