@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-require('dotenv').config()
 
 const auth = async (req, res, next) => {
 	try {
