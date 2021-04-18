@@ -41,7 +41,7 @@ export const updatePost = async (req, res) => {
 	const { id } = req.params
 	const { title, message, selectedFile, creator, tags } = req.body
 
-	if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id')
+	if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id')
 
 	const updatedPost = { title, message, selectedFile, creator, tags, _id: id }
 
