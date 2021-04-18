@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+require('dotenv').config()
 
 import User from '../models/user.js'
 
@@ -16,7 +17,7 @@ export const signin = async (req, res) => {
 		// If password doesn't match
 		if (!isPasswordCorrect) return res.status(400).json({ message: 'Invalid credentials.' })
 		// User exists and password is correct -> Get token
-		const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, 'test', { expiresIn: '1h' })
+		const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
 		// Return user
 		res.status(200).json({ result: existingUser, token })
 	} catch (error) {
@@ -38,7 +39,7 @@ export const signup = async (req, res) => {
 		// Create user
 		const result = await User.create({ email, password: hashedPassword, name: `${firstName}, ${lastName}` })
 		// Create token
-		const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: '1h' })
+		const token = jwt.sign({ email: result.email, id: result._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
 		// Return user
 		res.status(200).json({ result, token })
 	} catch (error) {
