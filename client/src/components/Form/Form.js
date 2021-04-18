@@ -43,7 +43,7 @@ const Form = ({ currentId, setCurrentId }) => {
 	}
 
 	const clear = () => {
-		setCurrentId(0)
+		setCurrentId(null)
 		setPostData({
 			title: '',
 			message: '',
