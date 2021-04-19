@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 
 import postRoutes from './routes/posts.js'
 import userRoutes from './routes/users.js'
+import commentRoutes from './routes/comments.js'
 
 // Initialize app
 const app = express()
@@ -19,6 +20,7 @@ app.use(cors())
 // Routes
 app.use('/posts', postRoutes)
 app.use('/user', userRoutes)
+app.use('/comments', commentRoutes)
 
 app.get('/', (req, res) => {
 	res.send('Hello to my API')

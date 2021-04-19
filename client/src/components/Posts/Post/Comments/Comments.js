@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Card, Typography, TextField, CardContent, Button } from '@material-ui/core'
+
+import { createComment } from '../../../../actions/comments'
 
 import useStyles from './styles'
 
 const Comments = () => {
+	const [comment, setComment] = useState('')
+	const dispatch = useDispatch()
+
+	const sendComment = () => {
+		dispatch(createComment(comment))
+	}
+
+	const handleChange = (e) => {
+		setComment(e.target.value)
+	}
+
 	const classes = useStyles()
 	return (
 		<Card className={classes.card}>
@@ -16,8 +30,8 @@ const Comments = () => {
 				</Typography>
 			</CardContent>
 			<div className={classes.sendComments}>
-				<TextField className={classes.commentField} name='comment' variant='outlined' label='Comment' />
-				<Button className={classes.sendButton} variant='contained' size='small' color='primary'>
+				<TextField className={classes.commentField} name='comment' variant='outlined' label='Comment' onChange={handleChange} />
+				<Button className={classes.sendButton} variant='contained' size='small' color='primary' onClick={sendComment}>
 					Send
 				</Button>
 			</div>
